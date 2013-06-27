@@ -1,0 +1,82 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>WebGL DAE model viewer</title>
+        <meta name="description" content="Simple DAE model viewer using three.js and WebGL">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- build:js scripts/vendor/modernizr.js -->
+        <script src="components/modernizr/modernizr.js"></script>
+        <!-- endbuild -->
+    </head>
+    <body>
+        <section class="model-viewer">
+
+            <div class="stage">
+                <header class="credits">
+                    <section class="controls">
+                        <h1>WebGL DAE model viewer</h1>
+                        <h2><a href="https://github.com/rexxars/webgl-model-viewer">by Espen Hovlandsdal</a> - best viewed in Chrome</h2>
+
+                        <table>
+                            <tr>
+                                <th>Model scale</th>
+                                <td>
+                                    <button class="scale up" type="button">+</button>
+                                    <button class="scale down" type="button">-</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Toggle stats</th>
+                                <td>
+                                    <button class="toggle-stats" type="button">Toggle on/off</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Load ZIPed DAE model <a href="#" class="model-help">(?)</a></th>
+                                <td>
+                                    <input type="file" value="Browse" class="upload" accept=".zip,application/zip">
+                                </td>
+                            </tr>
+                        </table>
+                    </section>
+
+                    <section class="help hidden">
+                        <h1>Loading ZIPed DAE models</h1>
+
+                        <p>Zip a DAE-file along with the referenced textures, making sure the texture paths are relative to the model within the zip.</p>
+
+                        <p>I exported my models using Sketchup, which produces a DAE-file along with a folder of textures. Zip'ing these will result in a recognizable ZIP-file.</p>
+
+                        <p class="center"><button class="model-help" type="button">OK</button></p>
+                    </section>
+                </header>
+            </div>
+
+            <div class="progress">
+                <div class="bar">Loading</div>
+            </div>
+        </div>
+
+        <script>
+            var _gaq=[['_setAccount','UA-5612205-1'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src='//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+
+        <!-- build:js scripts/main.js -->
+        <script src="scripts/three/three.js"></script>
+        <script src="scripts/three/three-collada-loader.js"></script>
+        <script src="scripts/three/three-orbit-controls.js"></script>
+        <script src="scripts/three/three-stats.js"></script>
+        <script data-main="scripts/main" src="components/requirejs/require.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

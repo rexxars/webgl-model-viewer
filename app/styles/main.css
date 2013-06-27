@@ -1,0 +1,152 @@
+* {
+     user-select: none;
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+}
+
+::selection { background: transparent;color:inherit; }
+::-moz-selection { background: transparent;color:inherit; }
+
+html, body{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #fafafa;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333;
+}
+
+.hidden {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+    color: blue;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.stage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.credits {
+    display: inline-block;
+    position: absolute;
+    background: #fff;
+    opacity: 0.9;
+
+    top: 0;
+    left: 0;
+    max-width: 312px;
+
+    margin-top: 0;
+    padding: 5px;
+    text-align: center;
+
+    border: 1px solid #000;
+    border-top: 0;
+    border-left: 0;
+
+    z-index: 10;
+}
+
+.credits h1, .credits h2 {
+    margin: 0;
+}
+
+.credits h2 {
+    font-size: 0.8em;
+    font-weight: normal;
+    font-size: 0.75em
+}
+
+.progress {
+    z-index: 3;
+
+    position: fixed;
+    width: 300px;
+    border: 1px solid #000;
+    top: 50%;
+    left: 50%;
+    margin-left: -151px;
+    margin-top: -16px;
+
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+    line-height: 30px;
+
+    opacity: 1;
+
+    -webkit-transition: opacity 1s;
+       -moz-transition: opacity 1s;
+         -o-transition: opacity 1s;
+            transition: opacity 1s;
+}
+
+.progress.gone {
+    opacity: 0;
+}
+
+.progress .bar {
+    width: 0%;
+
+    color: #fff;
+    overflow: hidden;
+
+    background: #1e5799;
+    background: -moz-linear-gradient(left, #1e5799 0%, #207cca 28%, #2989d8 60%, #7db9e8 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#1e5799), color-stop(28%,#207cca), color-stop(60%,#2989d8), color-stop(100%,#7db9e8));
+    background: -webkit-linear-gradient(left, #1e5799 0%,#207cca 28%,#2989d8 60%,#7db9e8 100%);
+    background: -o-linear-gradient(left, #1e5799 0%,#207cca 28%,#2989d8 60%,#7db9e8 100%);
+    background: -ms-linear-gradient(left, #1e5799 0%,#207cca 28%,#2989d8 60%,#7db9e8 100%);
+    background: linear-gradient(to right, #1e5799 0%,#207cca 28%,#2989d8 60%,#7db9e8 100%);
+
+    -webkit-transition: width 0.3s;
+       -moz-transition: width 0.3s;
+         -o-transition: width 0.3s;
+            transition: width 0.3s;
+}
+
+.credits table {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.credits th {
+    text-align: left;
+    font-size: 0.9em;
+    width: 180px;
+}
+
+.credits .upload {
+    width: 89px;
+}
+
+.credits .help p {
+    text-align: left;
+    padding: 5px;
+}
+
+.credits .help .center {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.scale {
+    margin: 0 5px;
+    width: 40px;
+    font-size: 1.1em;
+}
