@@ -13,7 +13,7 @@ define(['jquery', 'lodash', 'model-loader'], function($, _, modelLoader) {
             }
         },
 
-        init: function(container) {
+        init: function(container, options) {
             if (!this.supportsWebGL) {
                 return;
             }
@@ -26,6 +26,18 @@ define(['jquery', 'lodash', 'model-loader'], function($, _, modelLoader) {
 
             this.renderer.setSize(window.innerWidth, window.innerHeight);
             container.insertBefore(this.renderer.domElement, container.firstChild);
+
+			if (options && options.keysMap)
+				this.keysMap = options.keysMap;
+			else
+				this.keysMap = {left: 65, right: 68, forward: 87, back: 83, up: 32, down: 17};	
+
+			if (options && options.keySpeed != undefined)
+				this.keySpeed = options .keySpeed;
+			else
+				this.keySpeed = 5;
+			
+			this.keysPress = {left: false, right: false, forward: false, back: false, up: false, down: false};
 
             this.buildControls();
             this.positionCamera();
@@ -62,6 +74,18 @@ define(['jquery', 'lodash', 'model-loader'], function($, _, modelLoader) {
                 false
             );
 
+			setInterval(_.bind(this.moveCamera, this), 10);
+            window.addEventListener(
+                'keydown',
+                _.bind(this.onKeydown, this),
+                false
+            );
+            window.addEventListener(
+                'keyup',
+                _.bind(this.onKeyup, this),
+                false
+            );
+
             $('.scale').on('click', _.bind(function(e) {
                 var up = e.target.classList.contains('up'), model = this.model;
                 this.scale = Math.max(0.001, up ? this.scale + (this.scale * 0.75) : this.scale - (this.scale * 0.25));
@@ -92,6 +116,84 @@ define(['jquery', 'lodash', 'model-loader'], function($, _, modelLoader) {
 
             this.renderer.setSize(window.innerWidth, window.innerHeight);
         },
+
+		onKeydown: function() {
+
+		    switch ( event.keyCode ) {
+
+		        case this.keysMap.forward :
+		        	this.keysPress.forward = true;
+		        	event.preventDefault();
+		            break;
+		        case this.keysMap.back :
+		            this.keysPress.back = true;
+		            event.preventDefault();
+		            break;
+		        case this.keysMap.left :
+		            this.keysPress.left = true;
+		            event.preventDefault();
+		            break;
+		        case this.keysMap.right :
+		            this.keysPress.right = true;
+		            event.preventDefault();
+		            break;
+		        case this.keysMap.up :
+		        	this.keysPress.up = true;
+		        	event.preventDefault();
+		        	break;
+		        case this.keysMap.down :
+		        	this.keysPress.down = true;
+		        	event.preventDefault();
+		        	break;
+
+		    }
+		},
+		onKeyup: function() {
+		    switch ( event.keyCode ) {
+
+		        case this.keysMap.forward :
+		        	this.keysPress.forward = false;
+		        	event.preventDefault();
+		            break;
+		        case this.keysMap.back :
+		            this.keysPress.back = false;
+		            event.preventDefault();
+		            break;
+		        case this.keysMap.left :
+		            this.keysPress.left = false;
+		            event.preventDefault();
+		            break;
+		        case this.keysMap.right :
+		            this.keysPress.right = false;
+		            event.preventDefault();
+		            break;
+		        case this.keysMap.up :
+		        	this.keysPress.up = false;
+		        	event.preventDefault();
+		        	break;
+		        case this.keysMap.down :
+		        	this.keysPress.down = false;
+		        	event.preventDefault();
+		        	break;
+
+		    }
+		},
+		moveCamera: function(vector) {
+
+        	if (this.keysPress.forward)
+	            this.controls.pan( new THREE.Vector3( 0, 0, - 1 * this.keySpeed ) );
+	        if (this.keysPress.back)
+		        this.controls.pan( new THREE.Vector3( 0, 0, 1 * this.keySpeed ) );
+	        if (this.keysPress.left)
+	            this.controls.pan( new THREE.Vector3( - 1 * this.keySpeed, 0, 0 ) );
+	        if (this.keysPress.right)
+	            this.controls.pan( new THREE.Vector3( 1 * this.keySpeed, 0, 0 ) );
+	        if (this.keysPress.up)
+	            this.controls.pan( new THREE.Vector3( 0, 1 * this.keySpeed, 0 ) );
+	        if (this.keysPress.down)
+	            this.controls.pan( new THREE.Vector3( 0, - 1 * this.keySpeed, 0 ) );
+                        
+		},
 
         positionCamera: function(x, y, z) {
             this.camera.position.set(x || -5, y || 10, z || 15);
