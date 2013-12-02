@@ -9,7 +9,9 @@ define(['jquery', 'model-viewer', 'model-downloader', 'model-loader'], function(
 
     // Initialize the model viewer
     var stage = $('.model-viewer .stage');
-    ModelViewer.init(stage.get(0));
+    ModelViewer.init(stage.get(0)
+    	// ,{keysMap: {left: 81, right: 68, forward: 90, back: 83, up: 32, down: 17}} // Keyboard AZERTY
+    );
 
     modelLoader.get('models/epia.zip');
 
